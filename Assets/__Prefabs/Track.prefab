@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 199258836089969949}
   - component: {fileID: 199258836089969948}
   - component: {fileID: 199258836089969939}
+  - component: {fileID: 1647614230}
   m_Layer: 0
   m_Name: Middle Track
   m_TagString: Untagged
@@ -91,10 +92,24 @@ BoxCollider:
   m_GameObject: {fileID: 199258836089969937}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!64 &1647614230
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199258836089969937}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &199258836214324896
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,9 +122,10 @@ GameObject:
   - component: {fileID: 199258836214324899}
   - component: {fileID: 199258836214324898}
   - component: {fileID: 199258836214324897}
+  - component: {fileID: 319469153}
   m_Layer: 0
   m_Name: Left Track
-  m_TagString: Untagged
+  m_TagString: Track
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,6 +206,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!64 &319469153
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199258836214324896}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &199258836887827682
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +231,7 @@ GameObject:
   - component: {fileID: 199258836887827683}
   m_Layer: 0
   m_Name: Track
-  m_TagString: Untagged
+  m_TagString: Track
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,6 +265,7 @@ GameObject:
   - component: {fileID: 199258837441110841}
   - component: {fileID: 199258837441110840}
   - component: {fileID: 199258837441110847}
+  - component: {fileID: 1353628615}
   m_Layer: 0
   m_Name: Right Track
   m_TagString: Untagged
@@ -314,7 +345,21 @@ BoxCollider:
   m_GameObject: {fileID: 199258837441110845}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!64 &1353628615
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199258837441110845}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}

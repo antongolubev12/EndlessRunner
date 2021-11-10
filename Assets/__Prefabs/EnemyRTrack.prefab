@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 8814009618761739957}
   m_Layer: 0
   m_Name: EnemyRTrack
-  m_TagString: Untagged
+  m_TagString: Track
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -236,8 +236,8 @@ GameObject:
   - component: {fileID: 8814009619651098990}
   - component: {fileID: 8814009619651098985}
   m_Layer: 0
-  m_Name: Right Track
-  m_TagString: Untagged
+  m_Name: EnemyTrack
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

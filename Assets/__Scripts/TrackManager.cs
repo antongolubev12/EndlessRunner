@@ -33,7 +33,7 @@ public class TrackManager : MonoBehaviour
 
             else if(p.tag=="Jump")
             {
-                pos.z+=3;
+                pos.z+=0;
             }
             
             // print(p.tag+" loop: "+i);

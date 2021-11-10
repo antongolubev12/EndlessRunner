@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Track
   - Jump
+  - Enemy
   layers:
   - Default
   - TransparentFX
