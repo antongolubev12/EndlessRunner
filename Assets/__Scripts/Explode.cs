@@ -12,7 +12,7 @@ public class Explode : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         print("Colliding with " + other.collider.tag);
-        if (other.collider.tag == "Enemy")
+        if (other.collider.tag.Contains("Enemy"))
         {   
             //replace original cube with 8 minicubes on every axis
             for (int x = 0; x < miniCubesPerAxis; x++) {

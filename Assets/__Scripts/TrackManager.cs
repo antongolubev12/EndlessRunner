@@ -12,32 +12,52 @@ public class TrackManager : MonoBehaviour
     {
         Vector3 pos= new Vector3(0,0,0);
         int trackNumber;
-        GameObject p;
+        GameObject current;
+        GameObject lastTrack=null;
         
         for(int i=0; i<numOfTracks;i++){
             
-            if(i==0){
+            //control first two tracks
+            if(i==0||i==1){
                 trackNumber=0;
             }
             else{
                 trackNumber=Random.Range(0,tracks.Length);
             }
 
-            //int size=
-            p=Instantiate(tracks[trackNumber],pos,Quaternion.identity);
-
-            if (p.tag=="Track")
+            current=tracks[trackNumber];
+            
+            
+            //first loop
+            if(lastTrack==null)
             {
                 pos.z+=10;
             }
-
-            else if(p.tag=="Jump")
+            
+            //dont want two jumps in a row
+            else if(current.tag=="EnemyJump" && lastTrack.tag=="EnemyJump")
             {
-                pos.z+=0;
+                continue;
+            } 
+            else if(current.tag=="EnemyJump" && lastTrack.tag=="Track")
+            {
+                pos.z+=6.5f;
+            }
+            else if(current.tag=="Track" && lastTrack.tag=="Track")
+            {
+                pos.z+=10;
+            }
+            else if(current.tag=="Track" && lastTrack.tag=="EnemyJump")
+            {
+                pos.z+=6.5f;
             }
             
-            // print(p.tag+" loop: "+i);
-            // print(pos);
+            current=Instantiate(tracks[trackNumber],pos,Quaternion.identity);
+
+            lastTrack=current;
+
+            print("Loop: "+i+" Current: "+current.tag+" Last Track: "+lastTrack.tag);
+            print(pos);
             
         }
     }

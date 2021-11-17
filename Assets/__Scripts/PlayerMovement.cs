@@ -33,11 +33,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update() {
         SwitchLanes();
+        PlayerInput();
     }
 
     private void FixedUpdate() {
         Run();
-        PlayerInput();
     }
 
     void Run(){
@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
             }
             
         }
-
+        //Move left
         if(Input.GetKeyDown(KeyCode.A))
         {
             if(laneMovement==0)
@@ -82,7 +82,6 @@ public class PlayerMovement : MonoBehaviour
                 laneMovement=0;
             }
         }
-
     }
 
     private bool IsGrounded(){
