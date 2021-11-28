@@ -28,7 +28,6 @@ public class Explode : MonoBehaviour
     }
 
     void CreateCube(Vector3 coordinates) {
-
         //Create the cube
         GameObject miniCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
@@ -45,7 +44,6 @@ public class Explode : MonoBehaviour
 
         // print(reference);
         // print(transform.position+"-"+transform.localScale/2+"+"+miniCube.transform.localScale / 2);
-        
         
         //use the reference cube to calculate where to place the rest of the mini cubes
         miniCube.transform.position = reference + Vector3.Scale(coordinates, miniCube.transform.localScale);
