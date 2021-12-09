@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float playerSpeed = 10.0f;
     [SerializeField] private float jumpForce = 10.0f;
 
-    [SerializeField] private float xSpeed = 10;
+    public float xSpeed = 10;
 
     [SerializeField] private float speedIncrease = 0.05f;
 
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void IncreaseSpeed()
     {
-        //dont increase when paused
+        //only increase speed when game isnt paused
         if (Time.timeScale == 1)
         {
             playerSpeed = playerSpeed * speedIncrease;
@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Run()
-    {
+    {   
         Vector3 forwardMove = transform.forward * playerSpeed * Time.deltaTime;
         rb.MovePosition(rb.position + forwardMove);
         //rb.velocity=transform.forward*playerSpeed;
@@ -104,10 +104,11 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        if (transform.position.y <= 2)
+        if (transform.position.y <= -1.5f)
         {
             return true;
         }
         return false;
     }
+
 }

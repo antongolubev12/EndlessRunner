@@ -5,27 +5,37 @@ using UnityEngine;
 //create platforms at the start
 public class TrackManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] tracks;
+    [SerializeField] private GameObject[] stageOneTracks;
+    [SerializeField] private int numOfStageOne;
 
-    [SerializeField] GameObject[] stageOneTracks;
-    [SerializeField] int numOfStageOne;
+    [SerializeField] private GameObject[] stageTwoTracks;
+    [SerializeField] private int numOfStageTwo;
+    
+    [SerializeField] private GameObject[] stageThreeTracks;
+    [SerializeField] private int numOfStageThree;
+    
+    [SerializeField] private GameObject floor;
+   
+    private int stageCouter;
 
-    [SerializeField] GameObject[] stageTwoTracks;
-    [SerializeField] int numOfStageTwo;
-    
-    [SerializeField] GameObject[] stageThreeTracks;
-    [SerializeField] int numOfStageThree;
-    
-    private float lastPos;
+    private Stages stage=Stages.stageOne;
+
+    private float playerScore;
+
+    private GameObject lastTrack;
+
+    //lastTrackZ keeps track of z position of the last created track
+    private float lastTrackZ;
+
 
     // Start is called before the first frame update
     void Start()
     {   
-        lastPos=0f;
-        CreateTrack(stageOneTracks,numOfStageOne);
+        lastTrackZ=0f;
     }
 
     void Update() {
+        playerScore=PlayerPrefs.GetFloat("Score");
         CheckScore();
     }
 
@@ -34,13 +44,13 @@ public class TrackManager : MonoBehaviour
         Vector3 pos = new Vector3(0, 0, 0);
         int trackNumber;
         GameObject current;
-        GameObject lastTrack = null;
+        //GameObject lastTrack = null;
 
         for (int i = 0; i < numOfTracks; i++)
         {
 
             //control first track
-            if (i == 0 || i == 1)
+            if (i == 0 || i == 1 || i == 2 )
             {
                 trackNumber = 0;
             }
@@ -53,12 +63,11 @@ public class TrackManager : MonoBehaviour
 
 
             //first loop
-            if (lastTrack == null)
+            if (i==0)
             {
-                pos.z += 10;
                 //if starting the loop for the next stage, set the offset for the new track generation
-                //default is zero, so there is no loop
-                pos.z=lastPos;
+                pos.z=lastTrackZ;
+                pos.z += 10;
             }
 
             //dont want two jumps in a row
@@ -83,23 +92,86 @@ public class TrackManager : MonoBehaviour
             
             current = Instantiate(tracks[trackNumber], pos, Quaternion.identity);
 
-            //create a pointer in the loop that keeps track of the last created track
+            //pointer in the loop that keeps track of the last created track
             lastTrack = current;
 
-            lastPos=pos.z;
+            //keep track of the last z position if this function needs to be run again
+            lastTrackZ=pos.z;
+            //print(lastTrackZ);
 
-            // print("Loop: " + i + " Current: " + current.tag + " Last Track: " + lastTrack.tag);
-            // print(pos);
-
+            print("Loop: " + i + " Current: " + current.tag + " Last Track: " + lastTrack.tag);
+            print(pos);
+            CreateFloor(lastTrackZ);
         }
     }
 
-    void CheckScore()
-    {
-        if(PlayerPrefs.GetFloat("Score")>stageOneTracks.Length/2)
-        {
-            print("stage two");
-            CreateTrack(stageTwoTracks,numOfStageTwo);
+    void CreateFloor(float z)
+    {  
+        float numOfTracks=z/20;
+        Vector3 left = new Vector3(-16.5f, 2.5f, 0);
+        Vector3 right = new Vector3(15, 2.5f, 0);
+
+        for(int i=0;i<numOfTracks;i++){
+            Instantiate(floor, left, Quaternion.identity);
+            left.z+=22f;
+
+            Instantiate(floor, right, Quaternion.identity);
+            right.z+=22f;
         }
+    }
+    void CheckScore()
+    {   
+        switch(stage)
+        {   
+            case Stages.stageOne:
+                if(playerScore>lastTrackZ*.5 && stageCouter==0)
+                {
+                    CreateTrack(stageOneTracks,numOfStageOne);
+                    stage=Stages.stageTwo;
+                    stageCouter++;
+                }
+                break;
+            
+            case Stages.stageTwo:
+                if(playerScore>lastTrackZ*.5 && stageCouter==1)
+                {
+                    CreateTrack(stageTwoTracks,numOfStageTwo);
+                    stage=Stages.stageThree;
+                    stageCouter++;
+                }
+                break;
+            
+            case Stages.stageThree:
+                if(playerScore>lastTrackZ*.5 && stageCouter>1)
+                {
+                    CreateTrack(stageThreeTracks,numOfStageThree);
+                    stage=Stages.stageThree;
+                    stageCouter++;
+                }
+                break;
+        }
+
+        //if player score is half of the length of stage one tracks, spawn stage two tracks
+        //incCounter prevents this from being called every frame
+        // if(PlayerPrefs.GetFloat("Score")>stageOneTracks.Length/2 && stageCouter==0)
+        // {
+        //     print("stage two");
+        //     CreateTrack(stageTwoTracks,numOfStageTwo);
+        //     stageCouter++;
+        // }
+
+        // else if(PlayerPrefs.GetFloat("Score")>stageTwoTracks.Length/2 && stageCouter==1)
+        // {
+        //     print("stage three");
+        //     CreateTrack(stageThreeTracks,numOfStageThree);
+        //     stageCouter++;
+        // }
+    }
+
+        public enum Stages
+    {
+        stageOne,
+        stageTwo,
+        stageThree,
     }
 }

@@ -7,14 +7,17 @@ public class Score : MonoBehaviour
     [SerializeField] Text score;
     [SerializeField] Text highScoreText;
 
-    private string storedScore="";
+    private float currentScore;
 
     private static float highScore;
     // Update is called once per frame
 
     void Start() {
-        highScoreText.text="High Score: "+PlayerPrefs.GetFloat("HighScore").ToString("0");
+        //get the saved high score from PlayerPrefs
         highScore=PlayerPrefs.GetFloat("HighScore");
+        print(highScore);
+        //set UI text to players high score
+        highScoreText.text="High Score: "+highScore.ToString("0");
     }   
 
     void Update()
@@ -24,14 +27,24 @@ public class Score : MonoBehaviour
     
     void SetScore()
     {
+        
         if(player!=null)
         {   
-            PlayerPrefs.SetFloat("Score",player.position.z);
-            storedScore=score.text="Score: "+player.position.z.ToString("0");
-            if(player.position.z>highScore)
-            {
-                highScore=player.position.z;
-                SetHighScore(player.position.z);
+            currentScore=player.position.z;
+            //set the players score to their z position
+            //save to PlayerPrefs
+            PlayerPrefs.SetFloat("Score",currentScore);
+
+            //convert players score into string with no decimals and 
+            //set the UI text to the score
+            score.text="Score: "+currentScore.ToString("0");
+
+
+            //set highScore if player beats it
+            if(currentScore>highScore)
+            {   
+                highScore=currentScore;
+                SetHighScore(currentScore);
                 
             }
         }
@@ -44,12 +57,5 @@ public class Score : MonoBehaviour
             PlayerPrefs.SetFloat("HighScore",highscore);
             highScoreText.text="High Score: "+PlayerPrefs.GetFloat("HighScore").ToString("0");
         }
-    }
-
-    public float getScore(){
-        if(player!=null){
-            return player.position.z;
-        }
-        return 0;
     }
 }

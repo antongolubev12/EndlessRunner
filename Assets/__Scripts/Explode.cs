@@ -11,7 +11,6 @@ public class Explode : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        print("Colliding with " + other.collider.tag);
         if (other.collider.tag.Contains("Enemy"))
         {   
             //replace original cube with 8 minicubes on every axis
@@ -24,7 +23,6 @@ public class Explode : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        
     }
 
     void CreateCube(Vector3 coordinates) {
